@@ -80,7 +80,7 @@ namespace CRUD_API.Service
                 _errors.Add(new ErrorModel(ErrorCodes.MissingDesignation, ErrorMessage.MissingDesignation));
                 valid = false;
             }
-            if (newTrainee.BatchNumber != 0 && newTrainee.BatchNumber.IsPositiveNumber())
+            if (newTrainee.BatchNumber != 0 && !newTrainee.BatchNumber.IsPositiveNumber())
             {
                 _errors.Add(new ErrorModel(ErrorCodes.InvalidBatch, ErrorMessage.InvalidBatch));
             }

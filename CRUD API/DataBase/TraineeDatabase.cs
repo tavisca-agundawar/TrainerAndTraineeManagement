@@ -58,15 +58,10 @@ namespace CRUD_API.DataBase
 
         public bool IdExists(int id)
         {
-            try
-            {
-                _trainees.Find(trainee => trainee.ID == id);
+            if (_trainees.Find(trainee => trainee.ID == id) != null)
                 return true;
-            }
-            catch (Exception)
-            {
+            else
                 return false;
-            }
 
         }
     }
