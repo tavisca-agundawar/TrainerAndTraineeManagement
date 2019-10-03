@@ -36,5 +36,13 @@ namespace CRUD_API.Service
             }
             return valid;
         }
+
+        public static bool IsPositiveNumber(this int number)
+        {
+            if(number>0)
+                return true;
+            else
+                return false;
+        }
     }
 }

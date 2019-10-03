@@ -7,67 +7,67 @@ namespace CRUD_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TrainerController : ControllerBase
+    public class TraineeController : ControllerBase
     {
-        private readonly TrainerService _trainerService = new TrainerService();
-        // GET: api/Trainer
+        private static readonly TraineeService _traineeService = new TraineeService();
+
+        // GET: api/Trainee
         [HttpGet]
-        public ActionResult<IEnumerable<Trainer>> Get()
+        public ActionResult<IEnumerable<Trainee>> Get()
         {
-
-            var result = _trainerService.GetTrainers();
+            var result = _traineeService.GetTrainees();
             if (result.Errors != null)
             {
                 return BadRequest(result.Errors);
             }
             else
             {
-                return Ok(result.Trainers);
+                return Ok(result.Trainees);
             }
         }
 
-        // GET: api/Trainer/5
-        [HttpGet("{id}", Name = "GetTrainer")]
-        public ActionResult<Trainer> Get(int id)
+        // GET: api/Trainee/5
+        [HttpGet("{id}", Name = "GetTrainee")]
+        public ActionResult<Trainee> Get(int id)
         {
-            var result = _trainerService.GetTrainerById(id);
+            var result = _traineeService.GetTraineeById(id);
             if (result.Errors != null)
             {
                 return BadRequest(result.Errors);
             }
             else
             {
-                return Ok(result.Trainer);
+                return Ok(result.Trainee);
             }
         }
 
-        // POST: api/Trainer
+        // POST: api/Trainee
         [HttpPost]
-        public ActionResult<Trainer> Post([FromBody] Trainer newTrainer)
+        public ActionResult<Trainee> Post([FromBody] Trainee newTrainee)
         {
-            var result = _trainerService.AddTrainer(newTrainer);
+            var result = _traineeService.AddTrainee(newTrainee);
             if (result.Errors != null)
             {
                 return BadRequest(result.Errors);
             }
             else
             {
-                return Ok(result.Trainer);
+                return Ok(result.Trainee);
             }
         }
 
-        // PUT: api/Trainer/5
+        // PUT: api/Trainee/5
         [HttpPut("{id}")]
-        public ActionResult<Trainer> Put(int id, [FromBody] Trainer trainer)
+        public ActionResult<Trainee> Put(int id, [FromBody] Trainee trainee)
         {
-            var result = _trainerService.UpdateTrainer(trainer,id);
+            var result = _traineeService.UpdateTrainee(trainee,id);
             if (result.Errors != null)
             {
                 return BadRequest(result.Errors);
             }
             else
             {
-                return Ok(result.Trainer);
+                return Ok(result.Trainee);
             }
         }
 
@@ -75,7 +75,7 @@ namespace CRUD_API.Controllers
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {
-            var result = _trainerService.DeleteTrainerById(id);
+            var result = _traineeService.DeleteTraineeById(id);
             if (result)
             {
                 return Ok();

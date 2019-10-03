@@ -1,95 +1,88 @@
-﻿using CRUD_API.DataBase;
+﻿using System.Collections.Generic;
+using CRUD_API.DataBase;
 using CRUD_API.Model;
-using System.Collections.Generic;
 
 namespace CRUD_API.Service
 {
-    public class ValidateTrainerDetails
+    public class ValidateTraineeDetails
     {
-        public static bool IsValidTrainer(Trainer newTrainer,out List<ErrorModel> errors)
+        public static bool IsValidTrainee(Trainee newTrainee, out List<ErrorModel> errors)
         {
             errors = null;
             List<ErrorModel> _errors = new List<ErrorModel>();
             
             bool valid = true;
 
-            if (newTrainer.Name.IsBlankOrWhiteSpace())
+            if (newTrainee.Name.IsBlankOrWhiteSpace())
             {
                 _errors.Add(new ErrorModel(ErrorCodes.MissingName, ErrorMessage.MissingName));
                 valid = false;
             }
-            if (newTrainer.Name.ContainsNumbers())
+            if (newTrainee.Name.ContainsNumbers())
             {
                 _errors.Add(new ErrorModel(ErrorCodes.NameViolation, ErrorMessage.NameViolation));
                 valid = false;
             }
-            if (!newTrainer.Email.IsEmail())
+            if (!newTrainee.Email.IsEmail())
             {
                 _errors.Add(new ErrorModel(ErrorCodes.EmailViolation, ErrorMessage.EmailViolation));
                 valid = false;
             }
-            if (!newTrainer.PhoneNumber.IsPhoneNumber())
+            if (!newTrainee.PhoneNumber.IsPhoneNumber())
             {
                 _errors.Add(new ErrorModel(ErrorCodes.PhoneNumberViolation, ErrorMessage.PhoneNumberViolation));
                 valid = false;
             }
-            if (newTrainer.Designation.IsBlankOrWhiteSpace())
+            if (newTrainee.Designation.IsBlankOrWhiteSpace())
             {
                 _errors.Add(new ErrorModel(ErrorCodes.MissingDesignation, ErrorMessage.MissingDesignation));
                 valid = false;
             }
-            if (newTrainer.Technology.IsBlankOrWhiteSpace())
+            if (!newTrainee.BatchNumber.IsPositiveNumber())
             {
-                _errors.Add(new ErrorModel(ErrorCodes.MissingTechnology, ErrorMessage.MissingTechnology));
+                _errors.Add(new ErrorModel(ErrorCodes.InvalidBatch, ErrorMessage.InvalidBatch));
             }
-            if (newTrainer.Tribe.IsBlankOrWhiteSpace())
-            {
-                _errors.Add(new ErrorModel(ErrorCodes.MissingTribe, ErrorMessage.MissingTribe));
-            }
+
             if (_errors != null)
                 errors = _errors;
             return valid;
         }
 
-        public static bool IsValidUpdateTrainer(Trainer newTrainer, out List<ErrorModel> errors)
+        public static bool IsValidUpdateTrainee(Trainee newTrainee, out List<ErrorModel> errors)
         {
             errors = null;
             List<ErrorModel> _errors = new List<ErrorModel>();
             
             bool valid = true;
 
-            if (newTrainer.Name.IsBlankOrWhiteSpace() && newTrainer.Name!=null)
+            if (newTrainee.Name.IsBlankOrWhiteSpace() && newTrainee.Name!=null)
             {
                 _errors.Add(new ErrorModel(ErrorCodes.MissingName, ErrorMessage.MissingName));
                 valid = false;
             }
-            if (newTrainer.Name.ContainsNumbers() && newTrainer.Name != null)
+            if (newTrainee.Name.ContainsNumbers() && newTrainee.Name != null)
             {
                 _errors.Add(new ErrorModel(ErrorCodes.NameViolation, ErrorMessage.NameViolation));
                 valid = false;
             }
-            if (!newTrainer.Email.IsEmail() && newTrainer.Email != null)
+            if (!newTrainee.Email.IsEmail() && newTrainee.Email != null)
             {
                 _errors.Add(new ErrorModel(ErrorCodes.EmailViolation, ErrorMessage.EmailViolation));
                 valid = false;
             }
-            if (!newTrainer.PhoneNumber.IsPhoneNumber() && newTrainer.PhoneNumber != null)
+            if (!newTrainee.PhoneNumber.IsPhoneNumber() && newTrainee.PhoneNumber != null)
             {
                 _errors.Add(new ErrorModel(ErrorCodes.PhoneNumberViolation, ErrorMessage.PhoneNumberViolation));
                 valid = false;
             }
-            if (newTrainer.Designation.IsBlankOrWhiteSpace() && newTrainer.Designation != null)
+            if (newTrainee.Designation.IsBlankOrWhiteSpace() && newTrainee.Designation != null)
             {
                 _errors.Add(new ErrorModel(ErrorCodes.MissingDesignation, ErrorMessage.MissingDesignation));
                 valid = false;
             }
-            if (newTrainer.Technology.IsBlankOrWhiteSpace() && newTrainer.Technology != null)
+            if (newTrainee.BatchNumber != 0 && newTrainee.BatchNumber.IsPositiveNumber())
             {
-                _errors.Add(new ErrorModel(ErrorCodes.MissingTechnology, ErrorMessage.MissingTechnology));
-            }
-            if (newTrainer.Tribe.IsBlankOrWhiteSpace() && newTrainer.Tribe != null)
-            {
-                _errors.Add(new ErrorModel(ErrorCodes.MissingTribe, ErrorMessage.MissingTribe));
+                _errors.Add(new ErrorModel(ErrorCodes.InvalidBatch, ErrorMessage.InvalidBatch));
             }
             if (_errors != null)
                 errors = _errors;
