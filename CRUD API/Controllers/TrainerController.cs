@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using CRUD_API.Model;
 using CRUD_API.Service;
 using Microsoft.AspNetCore.Mvc;
