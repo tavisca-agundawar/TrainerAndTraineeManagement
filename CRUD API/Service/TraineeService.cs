@@ -7,7 +7,7 @@ namespace CRUD_API.Service
     public class TraineeService
     {
         private static readonly TraineeDatabase _traineeDatabase = new TraineeDatabase();
-        private static List<ErrorModel> _errors = new List<ErrorModel>();
+        //private List<ErrorModel> _errors = new List<ErrorModel>();
 
         public TraineeResponseModel GetTrainees()
         {
@@ -39,6 +39,7 @@ namespace CRUD_API.Service
 
         public TraineeResponseModel AddTrainee(Trainee newTrainee)
         {
+            List<ErrorModel> _errors = new List<ErrorModel>();
             bool valid = ValidateTraineeDetails.IsValidTrainee(newTrainee,out _errors);
             if (!valid)
             {
@@ -58,6 +59,7 @@ namespace CRUD_API.Service
                 var error = new List<ErrorModel>() { new ErrorModel(ErrorCodes.InvalidId, ErrorMessage.InvalidId) };
                 return new TraineeResponseModel(null, error);
             }
+            List<ErrorModel> _errors = new List<ErrorModel>();
             bool valid = ValidateTraineeDetails.IsValidTrainee(trainee, out _errors);
             if (!valid)
             {
